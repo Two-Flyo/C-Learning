@@ -1,18 +1,67 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<iostream>
 using namespace std;
-//using std::cout;
-//using std::endl;
-int main()
-{
-	cout << "hello world!" << endl;
-	printf("hello world!\n");
-	int a = 101;
-	double b = 1.1230;
-	char c = 97;
-	cout << a << b << c;
-	return 0;
-}
+
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//double Add(double x, double y)
+//{
+//	return x + y;
+//}
+//
+//int main()
+//{
+//	int a = Add(1, 2);
+//	double b = Add(1.1212, 321.1);
+//	printf("a = %d b = %lf ",a, b);
+//	return 0;
+//}
+
+//void fun(int x = 23333)
+//{ 
+//	cout << x << endl;
+//}
+//void fun2(int a = 0, int b = 0, int c = 0)
+//{
+//	cout << a << b <<  c << endl;
+//}
+//void fun3(int a, int b, int c = 0)
+//{
+//	cout << a << b << c << endl;
+//}
+//void fun4(int a, int b = 0, int c = 0)
+//{
+//	cout << a << b << c << endl;
+//}
+//int main()
+//{
+//	//fun(233);
+//	//fun();
+//	//fun3(1,2);
+//	//fun3(1,2,3);
+//	fun4(1);
+//	fun4(1, 2);
+//	fun4(1, 2, 3);
+//	return 0;
+//}
+
+
+
+//using namespace std;
+////using std::cout;
+////using std::endl;
+//int main()
+//{
+//	cout << "hello world!" << endl;
+//	printf("hello world!\n");
+//	int a = 101;
+//	double b = 1.1230;
+//	char c = 97;
+//	cout << a << b << c;
+//	return 0;
+//}
 
 //#include<stdio.h>
 //#include<stdlib.h>
