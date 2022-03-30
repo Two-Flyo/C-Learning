@@ -1,2 +1,3 @@
 ﻿  Test.cpp
+E:\C++\Basics\Basics\Test.cpp(17): warning C4172: 返回局部变量或临时变量的地址: z
   Basics.vcxproj -> E:\C++\Basics\Debug\Basics.exe

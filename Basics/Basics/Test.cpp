@@ -2,6 +2,99 @@
 #include<iostream>
 using namespace std;
 
+
+int main()
+{
+	//权限放大
+	//const int a = 10;
+	//int& b = a; //error
+	//权限不变
+	const int c = 20;
+	const int& d = c;
+	//权限缩小
+	int e = 30;
+	const int& f = e;
+	return 0;
+}
+
+//传值返回
+//int Add(int x, int y)
+//{
+//	int z = x + y;
+//	return z;
+//}
+
+
+//传引用返回
+//int& Add(int x, int y)
+//{
+//	int z = x + y;
+//	return z;
+//}
+//int& Count()
+//{
+//	static int n = 0;
+//	n++;
+//	//...
+//	return n;
+//}
+//int main()
+//{
+//	int& ret = Add(2, 3);
+//	cout << ret << endl;
+//	//Add(3, 5);
+//	printf("Test\n");
+//	cout << ret << endl;
+//	return 0;
+//}
+
+
+
+//void swap(int x, int y)//传值(不能实现交换的功能)
+//{
+//	int tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+//void swap(int* x, int* y)//传地址
+//{
+//	int tmp = *x;
+//	*x = *y;
+//	*y = tmp;
+//}
+//void swap(int& x, int& y)//传引用
+//{
+//	int tmp = x;
+//	x = y;
+//	y = tmp;
+//}
+////swap()构成重载，但是swap(x,y)调用时存在歧义
+//int main()
+//{
+//	int x = 1, y = 2;
+//	swap(&x, &y);
+//	printf("x=%d y=%d\n", x, y);
+//	//swap(x, y); swap(x,y)调用时存在歧义
+//	printf("x=%d y=%d\n", x, y);
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a = 233;
+//	int& b = a;
+//	printf("a=%d b=%d\n", a, b);
+//
+//	int& d = b;
+//	int t = 123;
+//	//int& c = t; error
+//	int c = 111;
+//	b = c;
+//	printf("a=%d b=%d\n", a, c);
+//	return 0;
+//}
+
 //int Add(int x, int y)
 //{
 //	return x + y;
