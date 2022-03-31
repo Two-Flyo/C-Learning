@@ -1,12 +1,44 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<iostream>
 using namespace std;
+//#define Add(X,Y) ((X)+(Y))
+#define ADD(X,Y) ((X)+(Y))
+
+//调用函数，需要建立栈桢，栈桢中要保存一些寄存器，结束后又要恢复
+//这些都是有销毁的
+//对于频繁调用的小函数，能否优化一下呢？
+int Add(int x, int y)
+{
+	int ret = x + y;
+	return ret;
+}
 
 int main()
 {
-
+	Add(1, 1);
+	Add(1, 1);
+	Add(1, 1);
+	Add(1, 1);
+	Add(1, 1);
+	Add(1, 1);
 	return 0;
 }
+
+//#ifdef __cplusplus
+//extern "C"
+//{
+//	void f1();
+//	void f2();
+//	void f3();
+//}
+//#endif
+//
+//
+//int main()
+//{
+//
+//	return 0;
+//}
 
 //int main()
 //{
