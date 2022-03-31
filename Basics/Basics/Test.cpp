@@ -2,20 +2,35 @@
 #include<iostream>
 using namespace std;
 
-
 int main()
 {
-	//权限放大
-	//const int a = 10;
-	//int& b = a; //error
-	//权限不变
-	const int c = 20;
-	const int& d = c;
-	//权限缩小
-	int e = 30;
-	const int& f = e;
+
 	return 0;
 }
+
+//int main()
+//{
+//	double a = 2.333;
+//	int a1 = a;
+//	int& a2 = a;//error
+//	const int& a3 = a;
+//	return 0;
+//}
+
+//常引用
+//int main()
+//{
+//	//权限放大
+//	//const int a = 10;
+//	//int& b = a; //error
+//	//权限不变
+//	const int c = 20;
+//	const int& d = c;
+//	//权限缩小
+//	int e = 30;
+//	const int& f = e;
+//	return 0;
+//}
 
 //传值返回
 //int Add(int x, int y)
