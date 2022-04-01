@@ -1,28 +1,97 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<iostream>
 using namespace std;
-//#define Add(X,Y) ((X)+(Y))
-#define ADD(X,Y) ((X)+(Y))
+
+void f(int)
+{
+	cout << "f(int)" << endl;
+}
+void f(int*)
+{
+	cout << "f(int*)" << endl;
+}
+int main()
+{
+	//C++98
+	int* p1 = NULL;
+	int* p2 = 0;
+	//C++11
+	int* p3 = nullptr;
+	f(NULL);
+	f(0);
+	f(p3);
+	return 0;
+}
+
+//int main()
+//{
+//	int* n = NULL;
+//	int arr[100] = { 0 };
+//	for (auto x : arr)
+//	{
+//		cout << x <<' ';
+//	}
+//	for (auto& x : arr)
+//	{
+//		x++;
+//	}
+//	for (auto x : arr)
+//	{
+//		cout << x << ' ';
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a = 10;
+//	const auto b = a;
+//	cout << typeid(b).name() << endl;
+//	//int a = 0;
+//	//const int aa = 123;
+//	//auto b = a;
+//	//auto bb = aa;
+//	//auto c = 233.111;
+//	//auto d = 'A';
+//	//cout << typeid(b).name() << endl;
+//	//cout << typeid(bb).name() << endl;
+//	//cout << typeid(c).name() << endl;
+//	//cout << typeid(d).name() << endl;
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a = 1;
+//	int& b = a;
+//	int* p = &a;
+//	b = 2;
+//	*p = 3;
+//	return 0;
+//}
+
+
+//#define ADD(X,Y) ((X)+(Y))
 
 //调用函数，需要建立栈桢，栈桢中要保存一些寄存器，结束后又要恢复
 //这些都是有销毁的
 //对于频繁调用的小函数，能否优化一下呢？
-int Add(int x, int y)
-{
-	int ret = x + y;
-	return ret;
-}
-
-int main()
-{
-	Add(1, 1);
-	Add(1, 1);
-	Add(1, 1);
-	Add(1, 1);
-	Add(1, 1);
-	Add(1, 1);
-	return 0;
-}
+//int Add(int x, int y)
+//{
+//	int ret = x + y;
+//	return ret;
+//}
+//
+//int main()
+//{
+//	Add(1, 1);
+//	Add(1, 1);
+//	Add(1, 1);
+//	Add(1, 1);
+//	Add(1, 1);
+//	Add(1, 1);
+//	return 0;
+//}
 
 //#ifdef __cplusplus
 //extern "C"
