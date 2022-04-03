@@ -6,18 +6,27 @@ using namespace std;
 class Date
 {
 public:
-	void Init(int year,int mouth,int day)
+	Date(int year = 0, int mouth = 1, int day = 1)
 	{
-		this->_year = year;//Date::_year = year;
-		this->_mouth = mouth;
-		this->_day = day;
+		_year = year;
+		_mouth = mouth;
+		_day = day;
+	}
+	Date(const Date& d)//拷贝构造
+	{
+		_year = d._year;
+		_mouth = d._mouth;
+		_day = d._day;
+	}
+	~Date()
+	{
+		//Date类没有资源需要清理,所以Date类不实现析构函数都可以
+		cout << "~Date()" << endl;
 	}
 	void Print()
 	{
-		//cout << _year << '-' << _mouth << '-' << _day << endl;
-		printf("%04d-%02d-%02d\n	", _year, _mouth, _day);
+		printf("%04d-%02d-%02d\n", _year, _mouth, _day);
 	}
-
 private:
 	int _year;
 	int _mouth;
@@ -26,14 +35,22 @@ private:
 
 int main()
 {
-	Date d1;
-	Date d2;
-	d1.Init(2022, 04, 02);
-	d2.Init(2002, 03, 30);
-	d1.Print();
-	d2.Print();
+	Date d1(2022, 03, 30);
+
+	Date d2(d1);
 	return 0;
 }
+
+
+//
+//int main()
+//{
+//	Date d1;
+//	Date d2(2002,03,30);
+//	d1.Print();
+//	d2.Print();
+//	return 0;
+//}
 
 //class A
 //{
