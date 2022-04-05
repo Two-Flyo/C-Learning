@@ -1,13 +1,29 @@
 #include"Date.h"
 
+void TestDate1()
+{
+	Date d1(2022,4,5);
+	Date ret = d1 + 100;
+	ret.Print();
+
+	d1 += 100;
+	d1.Print();
+
+	Date ret1 = d1++;//d1.operator(&d1,x)  xռλ
+	ret1.Print();
+	Date ret2 = ++d1;//d1.operator(&d1)
+	ret2.Print();
+}
+
 int main()
 {
-	Date d1;
-	Date d2(2022, 4, 4);
-	Date d3(2022, 4, 40);
-	Date d4(2000, 2, 29);
-	d1.Print();
-	d2.Print();
+	TestDate1();
+	//Date d1;
+	//Date d2(2022, 4, 4);
+	//Date d3(2022, 4, 40);
+	//Date d4(2000, 2, 29);
+	//d1.Print();
+	//d2.Print();
 	return 0;
 }
 

@@ -27,3 +27,39 @@ void Date::Print()
 {
 	printf("%04d-%02d-%02d\n", _year, _mouth, _day);
 }
+
+Date& Date::operator+=(int day)//进位：天数->月数->年数
+{
+	_day += day;
+	while(_day>GetMouthDay(_year, _mouth))
+	{
+		_day -= GetMouthDay(_year, _mouth);
+		_mouth++;
+		if (_mouth == 13)
+		{
+			_mouth = 1;
+			_year++;
+		}
+	}
+	return *this;
+}
+
+Date Date::operator+(int day)
+{
+	Date ret(*this);
+	ret._day += day;
+	return ret;
+}
+
+Date& Date::operator++()
+{
+	*this += 1;
+	return *this;
+}
+//++d1 后置++为了取分前置++，增加一个参数占位
+Date Date::operator++(int)
+{
+	Date ret(*this);
+	*this += 1;
+	return ret;
+}
