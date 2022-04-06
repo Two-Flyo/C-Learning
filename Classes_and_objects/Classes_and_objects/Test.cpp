@@ -16,7 +16,7 @@ void TestDate1()
 
 	Date ret3 = d1;
 	ret3.Print();
-	Date ret4 = ret3 - 1216;
+	Date ret4 = ret3 - -1216;
 	ret4.Print();
 }
 

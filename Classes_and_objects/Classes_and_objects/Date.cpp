@@ -65,6 +65,10 @@ Date Date::operator+(int day)
 //d1-=xxx
 Date& Date::operator-=(int day)
 {
+	if (day < 0)
+	{
+		return *this += (-day);
+	}
 	_day -= day;
 	while (_day <= 0)
 	{
