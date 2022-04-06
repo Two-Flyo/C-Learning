@@ -28,6 +28,17 @@ void Date::Print()
 	printf("%04d-%02d-%02d\n", _year, _mouth, _day);
 }
 
+Date& Date::operator=(const Date& d)
+{
+	if (*this != d)
+	{
+		_year = d._day;
+		_mouth = d._mouth;
+		_day = d._day;
+	}
+	return *this;
+}
+
 Date& Date::operator+=(int day)//进位：天数->月数->年数
 {
 	_day += day;
@@ -47,7 +58,31 @@ Date& Date::operator+=(int day)//进位：天数->月数->年数
 Date Date::operator+(int day)
 {
 	Date ret(*this);
-	ret._day += day;
+	ret += day;
+	return ret;
+}
+
+//d1-=xxx
+Date& Date::operator-=(int day)
+{
+	_day -= day;
+	while (_day <= 0)
+	{
+		--_mouth;
+		if (_mouth == 0)
+		{
+			--_year; 
+			_mouth = 12;
+		}
+		_day += GetMouthDay(_year, _mouth);
+	}
+	return *this;
+}
+//d1-xxx
+Date Date::operator-(int day)
+{
+	Date ret(*this);
+	ret -= day;
 	return ret;
 }
 
@@ -63,3 +98,42 @@ Date Date::operator++(int)
 	*this += 1;
 	return ret;
 }
+
+bool Date::operator>(const Date& d)
+{
+	if (this->_year > d._year)
+		return true;
+	else if (this->_year == d._year && this->_mouth > d._mouth)
+		return true;
+	else if (this->_year == d._year && this->_mouth == d._mouth && this->_day > d._day)
+		return true;
+	else
+		return false;
+}
+
+bool Date::operator==(const Date& d)
+{
+	return _year == d._day && _mouth == d._mouth && _day == d._day;
+}
+
+
+bool Date::operator>=(const Date& d)
+{
+	return *this > d || *this == d;
+}
+
+bool Date::operator<(const Date& d)
+{
+	return !(*this >= d);
+}
+
+bool Date::operator<=(const Date& d)
+{
+	return !(*this > d);
+}
+
+bool Date::operator!=(const Date& d)
+{
+	return !(*this == d);
+}
+

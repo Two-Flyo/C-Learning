@@ -13,6 +13,11 @@ void TestDate1()
 	ret1.Print();
 	Date ret2 = ++d1;//d1.operator(&d1)
 	ret2.Print();
+
+	Date ret3 = d1;
+	ret3.Print();
+	Date ret4 = ret3 - 1216;
+	ret4.Print();
 }
 
 int main()
