@@ -8,16 +8,16 @@ class Date
 {
 public:
 	Date(int year=0, int mouth=1, int day=1);
-	void Print();
+	void Print() const;
 	int GetMouthDay(int year, int mouth);
 
-	bool operator>(const Date& d);
-	bool operator<(const Date& d);
-	bool operator>=(const Date& d);
-	bool operator<=(const Date& d);
-	bool operator==(const Date& d);
+	bool operator>(const Date& d) const; 
+	bool operator<(const Date& d) const;
+	bool operator>=(const Date& d) const;
+	bool operator<=(const Date& d) const;
+	bool operator==(const Date& d) const;
 	Date& operator=(const Date& d);
-	bool operator!=(const Date& d);
+	bool operator!=(const Date& d) const;
 
 	//d1+=xxx
 	Date& operator+=(int day);
@@ -31,6 +31,20 @@ public:
 	Date& operator-=(int day);
 	//d1-xxx
 	Date operator-(int day);
+	//d2-d1
+	int operator-(const Date& d);
+	//d1--;
+	Date operator--(int day);
+	//--d1;
+	Date& operator--();
+
+	void PrintWeekDay()
+	{
+		const char* arr[] = { "周一","周二","周三","周四","周五","周六","周日" };
+		Date start(1900, 1, 1);
+		int count = *this - start;
+		cout << arr[count%7] << endl;
+	}
 private:
 	int _year;
 	int _mouth;

@@ -1,36 +1,85 @@
 #include"Date.h"
 
-void TestDate1()
-{
-	Date d1(2022,4,5);
-	Date ret = d1 + 100;
-	ret.Print();
-
-	d1 += 100;
-	d1.Print();
-
-	Date ret1 = d1++;//d1.operator(&d1,x)  xռλ
-	ret1.Print();
-	Date ret2 = ++d1;//d1.operator(&d1)
-	ret2.Print();
-
-	Date ret3 = d1;
-	ret3.Print();
-	Date ret4 = ret3 - -1216;
-	ret4.Print();
-}
+class A {
+public:
+	A* operator&()
+	{
+		return this;
+	}
+	const A* operator&() const
+	{
+		return this;
+	}
+};
 
 int main()
 {
-	TestDate1();
-	//Date d1;
-	//Date d2(2022, 4, 4);
-	//Date d3(2022, 4, 40);
-	//Date d4(2000, 2, 29);
-	//d1.Print();
-	//d2.Print();
+
+
 	return 0;
 }
+
+//void TestDate2()
+//{
+//	Date d1 = (2022, 1, 16);
+//	Date ret1 = d1++;
+//	ret1.Print();
+//	Date ret2 = ++d1;
+//	ret2.Print();
+//}
+
+//void TestDate3()
+//{
+//	Date d1(2022, 4, 7);
+//	d1.PrintWeekDay();
+//	//Date d1(1900, 1, 1);
+//	////d1.PrintWeekDay();*/
+//	//Date d2(2022, 1, 1);
+//	//int day = d2 - d1;
+//	//cout << day<< endl;
+//}
+//
+//void TestDate1()
+//{
+//	Date d1(2022,4,5);
+//	Date ret = d1 + 100;
+//	ret.Print();
+//
+//	d1 += 100;
+//	d1.Print();
+//
+//	Date ret1 = d1++;//d1.operator(&d1,x)  xռλ
+//	ret1.Print();
+//	Date ret2 = ++d1;//d1.operator(&d1)
+//	ret2.Print();
+//
+//	Date ret3 = d1;
+//	ret3.Print();
+//	Date ret4 = ret3 - -1216;
+//	ret4.Print();
+//}
+//
+//int main()
+//{
+//	Date d1;
+//	d1.Print();
+//	const Date d2;
+//	d2.Print();//error
+//	return 0;
+//}
+
+//int main()
+//{
+//	//TestDate1();
+//	TestDate3();
+//	//Date d1;
+//	//Date d2(2022, 4, 4);
+//	//Date d3(2022, 4, 40);
+//	//Date d4(2000, 2, 29);
+//	//d1.Print();
+//	//d2.Print();
+//	return 0;
+//}
 
 
 //#include<iostream>

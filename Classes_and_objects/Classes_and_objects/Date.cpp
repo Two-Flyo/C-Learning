@@ -5,7 +5,7 @@ int Date::GetMouthDay(int year, int mouth)
 	static int mouthDayArray[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
 	int day = mouthDayArray[mouth];
 	//  一年 365天多5h+
-	if (mouth == 2 && (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+	if (mouth == 2 && ((year % 4 == 0 && year % 100 != 0)|| (year % 400 == 0)))
 		day++;
 	return day;
 }
@@ -23,7 +23,7 @@ Date::Date(int year/*=0*/, int mouth/*=1*/, int day/*=1*/)
 	}
 	
 }
-void Date::Print()
+void Date::Print() const
 {
 	printf("%04d-%02d-%02d\n", _year, _mouth, _day);
 }
@@ -41,6 +41,10 @@ Date& Date::operator=(const Date& d)
 
 Date& Date::operator+=(int day)//进位：天数->月数->年数
 {
+	if (day < 0)
+	{
+		return *this -= (-day);
+	}
 	_day += day;
 	while(_day>GetMouthDay(_year, _mouth))
 	{
@@ -90,6 +94,27 @@ Date Date::operator-(int day)
 	return ret;
 }
 
+//d2-d1
+int Date::operator-(const Date& d)
+{
+	Date max = *this;
+	Date min = d;
+	int flag = 1;
+	int count = 0;
+	if (*this < d)
+	{
+		max = d;
+		min = *this;
+		flag = -1;
+	}
+	while (min != max)
+	{
+		++min;
+		++count;
+	}
+	return flag*count;
+}
+
 Date& Date::operator++()
 {
 	*this += 1;
@@ -103,7 +128,20 @@ Date Date::operator++(int)
 	return ret;
 }
 
-bool Date::operator>(const Date& d)
+//d1--;
+Date Date::operator--(int day)
+{
+	Date ret(*this);
+	*this -= 1;
+	return ret;
+}
+//--d1;
+Date& Date::operator--()
+{
+	return *this -= 1;
+}
+
+bool Date::operator>(const Date& d) const
 {
 	if (this->_year > d._year)
 		return true;
@@ -115,28 +153,27 @@ bool Date::operator>(const Date& d)
 		return false;
 }
 
-bool Date::operator==(const Date& d)
+bool Date::operator==(const Date& d) const
 {
-	return _year == d._day && _mouth == d._mouth && _day == d._day;
+	return _year == d._year && _mouth == d._mouth && _day == d._day;
 }
 
-
-bool Date::operator>=(const Date& d)
+bool Date::operator>=(const Date& d) const
 {
 	return *this > d || *this == d;
 }
 
-bool Date::operator<(const Date& d)
+bool Date::operator<(const Date& d) const
 {
 	return !(*this >= d);
 }
 
-bool Date::operator<=(const Date& d)
+bool Date::operator<=(const Date& d) const
 {
 	return !(*this > d);
 }
 
-bool Date::operator!=(const Date& d)
+bool Date::operator!=(const Date& d) const
 {
 	return !(*this == d);
 }
