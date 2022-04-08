@@ -6,6 +6,10 @@ using namespace std;
 
 class Date
 {
+	//ÓÑÔªº¯Êý
+	friend ostream& operator<<(ostream& out, const Date& d);
+	friend istream& operator>>(istream& in, Date& d);
+
 public:
 	Date(int year=0, int mouth=1, int day=1);
 	void Print() const;
@@ -18,6 +22,7 @@ public:
 	bool operator==(const Date& d) const;
 	Date& operator=(const Date& d);
 	bool operator!=(const Date& d) const;
+	//void operator<<(ostream& o);
 
 	//d1+=xxx
 	Date& operator+=(int day);

@@ -178,3 +178,16 @@ bool Date::operator!=(const Date& d) const
 	return !(*this == d);
 }
 
+
+ostream& operator<<(ostream& out, const Date& d)
+{
+	out << d._year << "/" << d._mouth << "/" << d._day << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Date& d)
+{
+	cout << "请依次输入年月" << endl;
+	in >> d._year >> d._mouth >> d._day;
+	return in;
+}

@@ -12,10 +12,32 @@ public:
 	}
 };
 
+//void Date::operator<<(ostream& out)
+//{
+//	out << _year << "/" << _mouth << "/" << _day << endl;
+//}
+
+
+//int main()
+//{
+//
+//	Date d1(2002, 3, 3);
+//	d1.operator<<(cout);//√
+//	//cout << d1 << endl;//error
+//	d1 << cout;//√  但是不符合使用习惯
+//	return 0;
+//}
+
 int main()
 {
-
-
+	Date d1(2002, 3, 30);
+	cout << d1 << endl;
+	Date d2;
+	while (1)
+	{
+		cin >> d2;
+		cout << d2;
+	}
 	return 0;
 }
 
