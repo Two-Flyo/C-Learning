@@ -3,11 +3,71 @@
 
 using namespace std;
 
+class A
+{
+public:
+	A()
+	{
+
+	}
+private:
+	int _a;
+};
+
 int main()
 {
+	A* p1 = (A*)malloc(sizeof(A));
+	new(p1)A(1);
+	int* p = NULL;
+	cout<<sizeof(p)<<endl;
 
-	return 0;
 }
+
+//class Stack
+//{
+//public:
+//	Stack(int capacity = 4)
+//		:_top(0), _capacity(capacity)
+//	{
+//
+//		_a = new int[capacity];
+//	}
+//	~Stack()
+//	{
+//		delete[] _a;;
+//		_a = nullptr;
+//		_capacity = _top = 0;
+//	}
+//private:
+//	int* _a;
+//	int _top;
+//	int _capacity;
+//};
+//
+//
+//int main()
+//{
+//	Stack st;
+//
+//	
+//	//Stack* pst2 = new Stack;//开空间+构造函数初始化
+//	////与malloc用法相同
+//	//Stack* pstr3 = (Stack*)operator new(sizeof(Stack));
+//	////char* p1 = (char*)malloc(0xfffffffffffffff);
+//	//
+//	//delete pst2; //析构函数(清理对象中的资源)+释放空间
+//	return 0;
+//}
+
+//
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int c = 30;
+//	printf("hello lrf\n");
+//	return 0;
+//}
 
 
 
