@@ -1,7 +1,5 @@
 ﻿  Test.cpp
-E:\C++\Template\Template\Test.cpp(22,22): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
-          with
-          [
-              T=int
-          ]
-  Template.vcxproj -> E:\C++\Template\x64\Debug\Template.exe
+E:\C++\Template\Template\Test.cpp(24,4): error C2955: “A”: 使用 类 模板 需要 模板 参数列表
+E:\C++\Template\Template\Test.cpp(8): message : 参见“A”的声明
+E:\C++\Template\Template\Test.cpp(24,10): error C2514: “A”: 无法构建类模板
+E:\C++\Template\Template\Test.cpp(8): message : 参见“A”的声明
