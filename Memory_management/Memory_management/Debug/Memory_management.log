@@ -1,2 +1,4 @@
 ﻿  Test.cpp
-  Memory_management.vcxproj -> E:\C++\Memory_management\Debug\Memory_management.exe
+E:\C++\Memory_management\Memory_management\Test.cpp(8,35): warning C4307: “*”: 有符号整型常量溢出
+E:\C++\Memory_management\Memory_management\Test.cpp(8,35): error C2118: 负下标
+E:\C++\Memory_management\Memory_management\Test.cpp(8): error C2148: 数组的总大小不得超过 0x7fffffff 字节

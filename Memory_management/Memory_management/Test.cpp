@@ -3,25 +3,33 @@
 
 using namespace std;
 
-class A
-{
-public:
-	A()
-	{
-
-	}
-private:
-	int _a;
-};
-
 int main()
 {
-	A* p1 = (A*)malloc(sizeof(A));
-	new(p1)A(1);
-	int* p = NULL;
-	cout<<sizeof(p)<<endl;
-
+	char* p = new char[2u*1024u * 1024u * 1024u];
+	printf("%p\n", p);
+	//cout << p << endl;
+	return 0;
 }
+
+//class A
+//{
+//public:
+//	A()
+//	{
+//
+//	}
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	A* p1 = (A*)malloc(sizeof(A));
+//	new(p1)A;
+//	int* p = NULL;
+//	cout<<sizeof(p)<<endl;
+//
+//}
 
 //class Stack
 //{
