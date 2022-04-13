@@ -1,0 +1,7 @@
+﻿  Test.cpp
+E:\C++\Template\Template\Test.cpp(22,22): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
+          with
+          [
+              T=int
+          ]
+  Template.vcxproj -> E:\C++\Template\x64\Debug\Template.exe
