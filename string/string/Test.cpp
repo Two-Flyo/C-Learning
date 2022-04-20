@@ -3,29 +3,99 @@
 #include<string>
 using namespace std;
 
-void func(const string& s)
+int main()
 {
-	string::const_reverse_iterator rit = s.rbegin();
-	while (rit != s.rend())
+	string s1;
+	int ret = 0;
+	while (cin >> s1)
 	{
-		cout << *rit << ' ';
-		++rit;
+		ret = s1.size();
 	}
-	cout << endl;
+	cout << ret << endl;
+	return 0;
 }
+//void TestPushBack()
+//{
+//	string s;
+//	size_t sz = s.capacity();
+//	cout << "capacity init:" << sz << endl;
+//	s.reserve(1010);
+//	for (int i = 0; i <1000; i++)
+//	{
+//		s += 'c';
+//		if (sz != s.capacity())
+//		{
+//			sz = s.capacity();
+//			cout << "capacity changed:" << sz << endl;
+//		}
+//	}
+//}
 
-void Test_string()
-{
-	string s1("hello world!");
-	string::reverse_iterator rit = s1.rbegin();
-	while (rit != s1.rend())
-	{
-		cout << *rit << ' ';
-		++rit;
-	}
+//void TestString()
+//{
+//	string s1;
+//	s1.reserve(100);
+//	string s2;
+//	s2.resize(100);
+//
+//	string s3("hello world!");
+//	s3.reserve(100);
+//
+//	string s4("hello world!");
+//	s4.resize(5);
+//	string file("test.txt");
+//	
+//}
 
-	const string str("hello world");
-	func(str);
+//void TestString2()
+//{
+//	string s1("lrfnisgerfadsgfoubqaoie/sadsahddad//.asdadsadasdjasldasda");
+//	size_t pos = s1.find('/');
+//	if (pos != string::npos)
+//	{
+//		string suffix1 = s1.substr(pos,s1.size()-pos);
+//		string suffix2 = s1.substr(pos);
+//		cout << suffix1 << endl;
+//		cout << suffix2 << endl;
+//	}
+//}
+
+//void TestString()
+//{
+//	string s
+//}
+//
+//int main()
+//{
+//	//TestPushBack();
+//	//TestString2();
+//	TestString3();
+//	return 0;
+//}
+
+//void func(const string& s)
+//{
+//	string::const_reverse_iterator rit = s.rbegin();
+//	while (rit != s.rend())
+//	{
+//		cout << *rit << ' ';
+//		++rit;
+//	}
+//	cout << endl;
+//}
+
+//void Test_string()
+//{
+//	string s1("hello world!");
+//	string::reverse_iterator rit = s1.rbegin();
+//	while (rit != s1.rend())
+//	{
+//		cout << *rit << ' ';
+//		++rit;
+//	}
+//
+//	const string str("hello world");
+//	func(str);
 	//遍历+修改
 	//(1)下标+[]
 	//for (size_t i = 0; i < s1.size(); i++)
@@ -55,14 +125,14 @@ void Test_string()
 	//{
 	//	cout << e << ' ';
 	//}
-}
+//}
 
-int main() 
-{	
-	Test_string();
-
-	return 0;
-}
+//int main() 
+//{	
+//	Test_string();
+//
+//	return 0;
+//}
 
 
 //int main()
