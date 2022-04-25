@@ -2,18 +2,68 @@
 #include<iostream>
 #include<string>
 using namespace std;
+class Solution {
+public:
+	bool ChecKChar(char c)
+	{
+		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+			return true;
+		else
+			return false;
+	}
+	bool IsEqual(char c1, char c2)
+	{
+		if ((c1 == c2) || (() && abs(c1 - c2) == 32))
+			return true;
+		else
+			return false;
+	}
+	bool isPalindrome(string s) {
+		int begin = 0, end = s.size() - 1;
+		while (begin < end)
+		{
+			while (begin < end && !ChecKChar(s[begin]))
+				begin++;
+
+			while (begin < end && !ChecKChar(s[end]))
+				end--;
+
+			if (IsEqual(s[begin], s[end]))
+				begin++, end--;
+			else
+				return false;
+		}
+		return true;
+	}
+};
 
 int main()
 {
-	string s1;
-	int ret = 0;
-	while (cin >> s1)
-	{
-		ret = s1.size();
-	}
-	cout << ret << endl;
+	string s = "0P";
+	Solution a;
+	a.isPalindrome(s);
 	return 0;
 }
+
+//int main()
+//{
+//	string s1("12344321");
+//	int s = stoi(s1);
+//	cout << s << endl;
+//	return 0;
+//}
+//
+////int main()
+//{
+//	string s1;
+//	int ret = 0;
+//	while (cin >> s1)
+//	{
+//		ret = s1.size();
+//	}
+//	cout << ret << endl;
+//	return 0;
+//}
 //void TestPushBack()
 //{
 //	string s;
