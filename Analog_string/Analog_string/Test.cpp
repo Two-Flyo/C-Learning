@@ -5,15 +5,20 @@ using namespace lrf;
 
 int main()
 {
-	string s1("lrf233!");
-	s1.push_back(' ');
-	s1.push_back('$');
-	s1.append("fighting!");
-	string s2;
-	s2 += 'x';
-	s2 += "123 233";
-	s2.insert(0,"lrff");
-	s2.erase(2);
+	string s1;
+	//cin >> s1;
+	//string s1 = "abcdefgfff";
+	//string s2 = "abcdefg";
+	//cout << (s1 >= s2) << endl;
+	//string s1("lrf233!");
+	//s1.push_back(' ');
+	//s1.push_back('$');
+	//s1.append("fighting!");
+	//string s2;
+	//s2 += 'x';
+	//s2 += "123 233";
+	//s2.insert(0,"lrff");
+	//s2.erase(2);
 	//cout << s1 << endl;
 
 	/*string s1("lrfhhh");

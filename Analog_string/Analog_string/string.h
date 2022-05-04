@@ -5,9 +5,9 @@
 #include<assert.h>
 #include<algorithm>
 
-using std::cout;
-using std::endl;
-using std::swap;
+//using std::cout;
+//using std::endl;
+//using std::swap;
 
 namespace lrf
 {
@@ -298,7 +298,7 @@ namespace lrf
 		}
 
 		string& insert(size_t pos, const char* s)
-		{
+		 {
 			assert(pos <= _size);
 			size_t len = strlen(s);
 			if (_size + len > _capacity)
@@ -307,7 +307,7 @@ namespace lrf
 			}
 
 			size_t end = _size + len;
-			while (end > pos)
+			while (end >= pos + len)
 			{
 				_str[end] = _str[end - len];
 				end--;
@@ -322,6 +322,12 @@ namespace lrf
 			push_back(ch);
 			return *this;
 		}
+		
+		//写成成员函数，可以访问私有成员，可以使用strcmp
+		//bool operator<(const string& s)const
+		//{
+		//	return strcmp(_str, s._str)<0;
+		//}
 
 		string& operator+=(const char* str)
 		{
@@ -333,7 +339,70 @@ namespace lrf
 		char* _str;
 		size_t _size;
 		size_t _capacity;//有效字符空间数(不包含\0)
+	public:
 		static const size_t npos;
 	};
 	const size_t string::npos = -1;
+
+	//非成员函数，不能访问私有成员变量
+	bool operator<(const string& s1, const string& s2)
+	{
+		//(1)
+		//size_t i1 = 0, i2 = 0;
+		//while (i1 < s1.size() && i2 < s2.size())
+		//{
+		//	if (s1[i1] < s2[i2])
+		//	{
+		//		return true;
+		//	}
+		//	else if (s1[i1] > s2[i2])
+		//	{
+		//		return false;
+		//	}
+		//	else
+		//	{
+		//		++i1, ++i2;
+		//	}
+		//}
+		//return i2 < s2.size() ? true : false;
+		//(2)
+
+		return strcmp(s1.c_str(), s2.c_str())<0;
+	}
+	bool operator==(const string& s1, const string& s2)
+	{
+		return strcmp(s1.c_str(), s2.c_str())==0;
+	}	
+	bool operator<=(const string& s1, const string& s2)
+	{
+		return s1 < s2 || s1 == s2;
+	}
+	bool operator>(const string& s1, const string& s2)
+	{
+		return !(s1 <= s2);
+	}
+	bool operator>=(const string& s1, const string& s2)
+	{
+		return !(s1 < s2);
+	}
+	bool operator!=(const string& s1, const string& s2)
+	{
+		return !(s1 == s2);
+	}
+
+	//cout s1
+
+	ostream& operator<<(ostream& out, const string& s)
+	{
+		//for (auto ch : s)
+		//{
+		//	out << ch;
+		//}
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			out << s[i];
+		}
+		out << s.c_str();//不能怎么写 对于这种字符串：hello\0world打印会出现问题
+		return out;
+	}
 }
