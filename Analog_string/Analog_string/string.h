@@ -5,9 +5,7 @@
 #include<assert.h>
 #include<algorithm>
 
-//using std::cout;
-//using std::endl;
-//using std::swap;
+using namespace std;
 
 namespace lrf
 {
@@ -394,15 +392,23 @@ namespace lrf
 
 	ostream& operator<<(ostream& out, const string& s)
 	{
-		//for (auto ch : s)
-		//{
-		//	out << ch;
-		//}
 		for (size_t i = 0; i < s.size(); i++)
 		{
 			out << s[i];
 		}
-		out << s.c_str();//不能怎么写 对于这种字符串：hello\0world打印会出现问题
+		//out << s.c_str();//不能怎么写 对于这种字符串：hello\0world打印会出现问题
 		return out;
+	}
+
+	istream& operator>>(istream& in, string& s)
+	{
+		char ch = in.get();
+		while (ch != ' ' && ch != '\n')
+		{
+			s += ch;
+			ch = in.get();
+		}
+
+		return in;
 	}
 }

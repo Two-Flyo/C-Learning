@@ -1,9 +1,2 @@
 ﻿  Test.cpp
-E:\C++\Analog_string\Analog_string\string.h(395,9): error C2143: 语法错误: 缺少“;”(在“&”的前面)
-E:\C++\Analog_string\Analog_string\string.h(395,9): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
-E:\C++\Analog_string\Analog_string\string.h(395,29): error C2473: “operator <<”: 看起来像函数定义，但却没有参数列表。
-E:\C++\Analog_string\Analog_string\string.h(395,29): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
-E:\C++\Analog_string\Analog_string\string.h(395,31): error C2065: “out”: 未声明的标识符
-E:\C++\Analog_string\Analog_string\string.h(395,36): error C2059: 语法错误:“const”
-E:\C++\Analog_string\Analog_string\string.h(396,2): error C2143: 语法错误: 缺少“;”(在“{”的前面)
-E:\C++\Analog_string\Analog_string\string.h(396,2): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+  Analog_string.vcxproj -> E:\C++\Analog_string\x64\Debug\Analog_string.exe

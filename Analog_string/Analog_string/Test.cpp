@@ -1,11 +1,13 @@
 #include"string.h"
-
+#include<iostream>
 using namespace lrf;
 
 
 int main()
 {
-	string s1;
+	lrf::string s1;
+	cin >> s1;
+	cout << s1;
 	//cin >> s1;
 	//string s1 = "abcdefgfff";
 	//string s2 = "abcdefg";
