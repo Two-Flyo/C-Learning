@@ -5,9 +5,14 @@ using namespace lrf;
 
 int main()
 {
-	lrf::string s1;
-	cin >> s1;
-	cout << s1;
+	int a = 123;
+	int& b = a;
+	int& c = a;
+	printf("%p\n %p\n", &b, &c);
+
+	//lrf::string s1;
+	//cin >> s1;
+	//cout << s1;
 	//cin >> s1;
 	//string s1 = "abcdefgfff";
 	//string s2 = "abcdefg";

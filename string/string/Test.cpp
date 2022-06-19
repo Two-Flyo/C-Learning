@@ -1,49 +1,94 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<iostream>
 #include<string>
+
 using namespace std;
-class Solution {
-public:
-	bool ChecKChar(char c)
-	{
-		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
-			return true;
-		else
-			return false;
-	}
-	bool IsEqual(char c1, char c2)
-	{
-		if ((c1 == c2) || (() && abs(c1 - c2) == 32))
-			return true;
-		else
-			return false;
-	}
-	bool isPalindrome(string s) {
-		int begin = 0, end = s.size() - 1;
-		while (begin < end)
-		{
-			while (begin < end && !ChecKChar(s[begin]))
-				begin++;
-
-			while (begin < end && !ChecKChar(s[end]))
-				end--;
-
-			if (IsEqual(s[begin], s[end]))
-				begin++, end--;
-			else
-				return false;
-		}
+bool CheckLetter(char c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
 		return true;
-	}
-};
-
+	else
+		return false;
+}
 int main()
 {
-	string s = "0P";
-	Solution a;
-	a.isPalindrome(s);
+	
+	char c1 = '0', c2 = 'P';
+	if ((c1 == c2) || (CheckLetter(c1) && CheckLetter(c2) && abs(c1 - c2) == 32))
+		cout << "==" << endl;
+	//string s1("zbdxlrf~");
+	//s1.push_back('A');
+	//s1.append("abdcsa");
+	//for (size_t i = 0; i < s1.length(); i++)
+	//{
+	//	cout<<s1[i];
+	//}
+	//for (int i = 0; i < s1.size(); i++)
+	//{
+	//	
+
+	//	//cout << s1.operator[](i) << " ";
+	//	//cout << s1[i]++ << " ";
+	//}
 	return 0;
 }
+
+
+//int main()
+//{
+//	string s1("hello lrf!\n");
+//	string s2(6, 'c');
+//	string s3();
+//	string s4(s1);
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//	bool ChecKChar(char c)
+//	{
+//		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+//			return true;
+//		else
+//			return false;
+//	}
+//	bool IsEqual(char c1, char c2)
+//	{
+//		if ((c1 == c2) || (() && abs(c1 - c2) == 32))
+//			return true;
+//		else
+//			return false;
+//	}
+//	bool isPalindrome(string s) {
+//		int begin = 0, end = s.size() - 1;
+//		while (begin < end)
+//		{
+//			while (begin < end && !ChecKChar(s[begin]))
+//				begin++;
+//
+//			while (begin < end && !ChecKChar(s[end]))
+//				end--;
+//
+//			if (IsEqual(s[begin], s[end]))
+//				begin++, end--;
+//			else
+//				return false;
+//		}
+//		return true;
+//	}
+//};
+//
+//int main()
+//{
+//	string s = "0P";
+//	Solution a;
+//	a.isPalindrome(s);
+//	return 0;
+//}
 
 //int main()
 //{
