@@ -3,35 +3,126 @@
 #include<string>
 
 using namespace std;
-bool CheckLetter(char c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
-		return true;
-	else
-		return false;
-}
+
 int main()
 {
-	
-	char c1 = '0', c2 = 'P';
-	if ((c1 == c2) || (CheckLetter(c1) && CheckLetter(c2) && abs(c1 - c2) == 32))
-		cout << "==" << endl;
-	//string s1("zbdxlrf~");
-	//s1.push_back('A');
-	//s1.append("abdcsa");
-	//for (size_t i = 0; i < s1.length(); i++)
-	//{
-	//	cout<<s1[i];
-	//}
-	//for (int i = 0; i < s1.size(); i++)
-	//{
-	//	
-
-	//	//cout << s1.operator[](i) << " ";
-	//	//cout << s1[i]++ << " ";
-	//}
+	string s = "10000000000";
+	int val = stoi(s,nullptr,2);
+	cout << val << endl;
+	//string s = "abcdefghijk";
+	//
 	return 0;
 }
+
+//int main()
+//{
+//
+//	string url = "https://cplusplus.com/reference/string/string/substr/";
+//	size_t pos1 = url.find(':');
+//	string protocol = url.substr(0, pos1 - 0);
+//	cout << protocol << endl;
+//
+//	size_t pos2 = url.find('/', pos1 + 3);
+//	string domain = url.substr(pos1 + 3, pos2-pos1-3);
+//	cout << domain << endl;
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//	string file = "file.txt";
+//
+//	size_t pos = file.find('.');
+//	if (pos != string::npos)
+//	{
+//		string suffix = file.substr(pos);
+//		cout << suffix << endl;
+//	}
+//
+//
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	string s1;
+//	string s2;
+//	s1.reserve(100);
+//	s1.resize(100);
+//	//string s;
+//	//size_t	sz = s.capacity();
+//	//for (int i = 0; i < 100; i++)
+//	//{
+//	//	s += 'c';
+//	//	if (sz != s.capacity())
+//	//	{
+//	//		sz = s.capacity();
+//	//	}
+//	//}
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	string s = "bcdefg";
+//	string::iterator it = s.end();
+//	string::reverse_iterator rit = s.rbegin();
+//	//if (s.begin() == s.rend())
+//	//{
+//	//	cout << "2333" << endl;
+//	//}
+//	
+//	/*for (auto e : s)
+//	{
+//		cout << e << ' ';
+//	}
+//	for (auto& e : s)
+//	{
+//		cout << --e << ' ';
+//	}*/
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//
+//using namespace std;
+//bool CheckLetter(char c)
+//{
+//	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+//		return true;
+//	else
+//		return false;
+//}
+//int main()
+//{
+//	
+//	char c1 = '0', c2 = 'P';
+//	if ((c1 == c2) || (CheckLetter(c1) && CheckLetter(c2) && abs(c1 - c2) == 32))
+//		cout << "==" << endl;
+//	//string s1("zbdxlrf~");
+//	//s1.push_back('A');
+//	//s1.append("abdcsa");
+//	//for (size_t i = 0; i < s1.length(); i++)
+//	//{
+//	//	cout<<s1[i];
+//	//}
+//	//for (int i = 0; i < s1.size(); i++)
+//	//{
+//	//	
+//
+//	//	//cout << s1.operator[](i) << " ";
+//	//	//cout << s1[i]++ << " ";
+//	//}
+//	return 0;
+//}
 
 
 //int main()
