@@ -87,7 +87,12 @@ namespace lrf
 				T* tmp = new T[n];
 				if (_start != nullptr)
 				{
-					memcpy(tmp, _start, sizeof(T) * size());
+					//memcpy(tmp, _start, sizeof(T) * size());
+					for (size_t i = 0; i < sz; i++)
+					{
+						//T是int，一个一个拷贝没问题，如果T是string等自定义类型，也没有问题
+						tmp[i] = _start[i];
+					}
 					delete[] _start;
 				}
 				_start = tmp;
@@ -142,6 +147,7 @@ namespace lrf
 			}
 			*pos = x;
 			++_finish;
+			return pos;//返回新位置的迭代器
 		}
 
 		iterator erase(iterator pos)  //返回所删除元素的下一个元素的位置
@@ -173,7 +179,7 @@ namespace lrf
 			if (_finish==_endofstorage)
 			{
 				//扩容
-				reserve(capacity() == 0 ? 4 : capacity() * 2);
+				reserve(capacity() == 0  ? 4 : capacity() * 2);
 			}
 			*_finish = x;
 			++_finish;
@@ -199,7 +205,19 @@ namespace lrf
 	
 }
 
-void test_vector()
+void test_vector2()
+{
+	lrf::vector<string> v1;
+	v1.push_back("1234556788934");
+	v1.push_back("1234556788934");
+	v1.push_back("1234556788934");
+	v1.push_back("1234556788934");
+	v1.push_back("1234556788934");
+	v1.push_back("1234556788934");
+
+}
+
+void test_vector1()
 {
 	lrf::vector<int> v1;
 	v1.push_back(1);

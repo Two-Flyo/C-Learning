@@ -9,6 +9,8 @@ using namespace std;
 
 int main()
  {
-	test_vector();
+	std::string s1("12345");
+	cout << sizeof(s1) << endl;
+	//test_vector2();
 	return 0;
 }
