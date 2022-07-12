@@ -224,7 +224,11 @@ namespace lrf
 			}
 			return *this;
 		}
-
+		void clear()
+		{
+			_str[0] = '\0';
+			_size = 0;
+		}
 	private:
 		char* _str;
 		size_t _size;
@@ -257,6 +261,7 @@ namespace lrf
 
 
 
+
 	bool operator>=(const string& s1, const string& s2)
 	{
 		return s1 > s2 || s1 == s2;
@@ -273,6 +278,7 @@ namespace lrf
 	}
 	std::istream& operator>>(std::istream& in,string& s)
 	{
+		s.clear();
 		char ch = in.get();
 		while (ch != ' ' && ch != '\n')
 		{
@@ -291,9 +297,7 @@ void testmystring()
 {  
 	lrf::string s1("lrf12345");
 	std::cin >> s1;
-	s1 += '\0';
-	s1 += "213";
-	std::cout << s1;
+	std::cout << s1 << std::endl;
 	//std::string s2("lrf12345");
 	//s2 += '\0';
 	//s2 += "abcdefg";
