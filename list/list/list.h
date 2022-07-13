@@ -1,5 +1,9 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
+#include<cassert>
+#include<algorithm>
+#include<iostream>
+using namespace std;
 
 namespace lrf
 {
@@ -42,8 +46,6 @@ namespace lrf
 			return &_node->_data;
 		}
 
-
-
 		bool operator!=(const self& it) const
 		{
 			return _node != it._node;
@@ -82,8 +84,6 @@ namespace lrf
 		//默认生成的拷贝构造和赋值已经足够了
 		//析构？迭代器是借助节点的指针访问修改链表，节点属于链表，不属于迭代器
 	};
-	
-
 
 	template<class T>
 	class list
@@ -121,19 +121,153 @@ namespace lrf
 		{	
 			return const_iterator(_head);
 		}
+		//lt2(lt1) 传统写法
+		//list(const list<T>& lt)
+		//{
+		//	_head = new Node();
+		//	_head->_next = _head;
+		//	_head->_prev = _head;
+		//	for (auto e : lt)
+		//	{
+		//		push_back(e);
+		//	}
+		//}
+		//现代写法
+		list(list<T>& lt)
+		{
+			_head = new Node();
+			_head->_next = _head;
+			_head->_prev = _head;
+			list<T> tmp(lt.begin(),lt.end());
+			std::swap(_head,tmp._head);
+		}
+		
 
+		list(int n, const T& val = T())//n之所以定义为int，是因为定义成size_t类型之后，
+			//这样使用list(5,5)，编译器会匹配到template<class InputIterator>
+			//list(InputIterator first, InputIterator last)
+		{
+			_head = new Node();
+			_head->_next = _head;
+			_head->_prev = _head;
+			for (size_t i = 0; i < n; i++)
+			{
+				push_back(val);
+			}
+		}
+		//迭代器构造
+		template<class InputIterator>
+		list(InputIterator first,InputIterator last)
+		{
+			_head = new Node();
+			_head->_next = _head;
+			_head->_prev = _head;
+			while (first != last)
+			{
+				push_back(*first);
+				++first;
+			}	
+		}
+
+		~list() 
+		{
+			clear();
+			delete _head;
+			_head = nullptr;
+		}
+		void  clear()
+		{
+			iterator it = begin();
+			//while (it != end())
+			//{
+			//	iterator del = it++;
+			//	delete del._node;
+			//}
+			//// 恢复链接关系
+			//_head->_next = _head;
+			//_head->_prev = _head;
+			//复用erase
+			while (it != end())
+			{
+				erase(it++);
+			}
+		}
 
 		void push_back(const T& x)
 		{
 			Node* tail = _head->_prev;
 			Node* newnode = new Node(x);
 			tail->_next = newnode;
+			newnode->_prev = tail;
 			newnode->_next = _head;
 			_head->_prev = newnode;
+			//也可复用insert
+			//insert(end(),x);
 		}
 
-		void insert(iterator pos, const T& x);
-		void erase(iterator pos);
+		//头插
+		void push_front(const T& x)
+		{
+			insert(begin(), x);
+		}
+
+		//erase之后，迭代器失效了
+		iterator erase(iterator pos)
+		{
+			assert(pos != end());//不能把哨兵位的头给删除
+			Node* prev = pos._node->_prev;
+			Node* next = pos._node->_next;
+			delete pos._node;
+			prev->_next = next;
+			next->_prev = prev;
+			return iterator(pos._node->_next);
+		}
+
+		//lt2=lt1
+		//list<T>&operator=(const list<T>&lt)
+		//{
+		//	if (this != &lt)
+		//	{
+		//		clear();
+		//		for (auto e : lt)
+		//		{
+		//			push_back(e);
+		//		}
+		//	}
+		//	return *this;
+		//}
+		//现代写法
+		list<T>& operator=(list<T> lt)
+		{
+			std::swap(_head, lt._head);
+			return *this;
+		}
+
+
+
+		//尾删
+		void pop_back()
+		{
+			erase(--end());
+		}
+		//头删
+		void pop_front()
+		{
+			erase(begin());
+		}
+
+
+		//这里insert后，pos是不会失效的
+		void insert(iterator pos, const T& x)
+		{
+			Node* cur = pos._node;
+			Node* prev = cur->_prev;
+			Node* newnode = new Node(x);
+			prev->_next = newnode;
+			newnode->_prev = prev;
+			newnode->_next = cur;
+			cur->_prev = newnode;
+		}
 
 
 	private:
@@ -150,15 +284,41 @@ namespace lrf
 		}
 	}
 
-	void test_list1()
+	void test_list()
 	{
-		list<int> lt;
-		lt.push_back(1);
-		lt.push_back(2);
-		lt.push_back(3);
-		lt.push_back(4);
-		lt.push_back(5);
-		lt.push_back(6);
-		print_list(lt);
+		list<int> l1;
+		l1.push_back(2);
+		l1.push_back(3);
+		l1.push_back(4);
+		l1.push_back(5);
+		l1.push_back(6);
+
+		//list<int> l2(l1);
+		//for (auto e : l2)
+		//{
+		//	cout << e << ' ';
+		//}
+		//cout << std::endl;
+
+		list<int> l3;
+		l3.push_back(1);
+		l3.push_back(2);
+		l3.push_back(3);
+		l3.push_back(4);
+		l3.push_back(5);
+
+		l1 = l3;
 	}
+
+	//void test_list1()
+	//{
+	//	list<int> lt;
+	//	lt.push_back(1);
+	//	lt.push_back(2);
+	//	lt.push_back(3);
+	//	lt.push_back(4);
+	//	lt.push_back(5);
+	//	lt.push_back(6);
+	//	print_list(lt);
+	//}
 }

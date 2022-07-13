@@ -1,7 +1,2 @@
 ﻿  Test.cpp
-D:\C++_Learing\list\list\list.h(159,22): error C2228: “._data”的左边必须有类/结构/联合
-D:\C++_Learing\list\list\list.h(159,22): message : 类型是“T”
-          with
-          [
-              T=int
-          ]
+  list.vcxproj -> D:\C++_Learing\list\x64\Debug\list.exe
