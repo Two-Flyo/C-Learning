@@ -7,6 +7,10 @@ using namespace std;
 
 namespace lrf
 {
+	//ÊÊÅäÆ÷
+	//
+
+
 	template<class T>
 	struct ListNode
 	{
