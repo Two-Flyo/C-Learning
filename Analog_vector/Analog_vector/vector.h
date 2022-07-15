@@ -1,6 +1,7 @@
-#pragma once
+#pragma once 
+#include<assert.h>
 #include<iostream>
-#include<cassert>
+#include<algorithm>
 using namespace std;
 
 namespace lrf
@@ -8,28 +9,43 @@ namespace lrf
 	template<class T>
 	class vector
 	{
-
-	public:
 		typedef T* iterator;
-		typedef const T* const_iterator;
+	public:
 		vector()
 			:_start(nullptr),
-			 _finish(nullptr),
-			 _endofstorage(nullptr)
+			_finish(nullptr),
+			_endofstorage(nullptr)
 		{}
-		template <class InputIterator>
-		vector(InputIterator first, InputIterator last)
-			:_start(nullptr),
-			 _finish(nullptr),
-			 _endofstorage(nullptr)
+
+		//一个类模板的成员函数，又可以是一个函数模板
+		template<class InputIterator>
+		vector(InputIterator first,InputIterator last)
+			:_start(nullptr),_finish(nullptr),_endofstorage(nullptr)
 		{
 			while (first != last)
 			{
 				push_back(*first);
-				++first;
+				first++;
 			}
 		}
 
+		~vector()
+		{
+			if (_start)
+			{
+				delete[] _start;
+				_start = _finish = _endofstorage = nullptr;
+			}
+		}
+
+
+		//vector(const vector<T>& v)
+		//{
+		//	_start = new T[v.capacity()];
+		//	_finish = _start + v.size();
+		//	_endofstorage = _start + v.capacity();
+		//	memcpy(_start,v._start,v.size()*sizeof(T));
+		//}
 
 		void swap(vector<T>& v)
 		{
@@ -39,69 +55,48 @@ namespace lrf
 		}
 
 		vector(const vector<T>& v)
+			:_start(nullptr),_finish(nullptr),_endofstorage(nullptr)
 		{
-			vector<T> tmp(v.begin(),v.end());
+			vector<T> tmp(v.begin(), v.end());
 			swap(tmp);
 		}
 
-		~vector()
-		{
-			if (_start != nullptr)
-			{
-				delete[] _start;
-				_start = _finish = _endofstorage = nullptr;
-			}
-		}
-
-		vector<T>& operator=(vector<T> v)
+		vector<T>& operator=(vector<T>& v) 
 		{
 			swap(v);
-
 			return *this;
 		}
-
-		iterator begin()
+		size_t size() const
 		{
-			return _start;
+			return _finish - _start;
 		}
-		iterator end()
+		size_t capacity() const
 		{
-			return _finish;
+			return _endofstorage - _start;
 		}
-
-		const_iterator begin() const
+			
+		T& operator[] (size_t i)
 		{
-			return _start;
-		}
-		const_iterator end() const
-		{
-			return _finish;
+			assert(i < size());
+			return _start[i];
 		}
 
 		void reserve(size_t n)
 		{
-			if (n>capacity())
+			size_t len = size();//扩容之后会影响size()的计算，故提前算好
+			T* tmp = new T[n];
+			if (_start)
 			{
-				//扩容
-				size_t sz = size();
-				T* tmp = new T[n];
-				if (_start != nullptr)
-				{
-					//memcpy(tmp, _start, sizeof(T) * size());
-					for (size_t i = 0; i < sz; i++)
-					{
-						//T是int，一个一个拷贝没问题，如果T是string等自定义类型，也没有问题
-						tmp[i] = _start[i];
-					}
-					delete[] _start;
-				}
-				_start = tmp;
-				_finish = tmp + sz;
-				_endofstorage = _start + n;
+				memcpy(tmp, _start, sizeof(T) * n);
+				delete _start;
 			}
+			_start = tmp;
+			_finish = _start + len;
+			_endofstorage = _start + n;
+
 		}
 
-		void resize(size_t n, const T& val = T())
+		void resize(size_t n, const T& val = T()) //匿名对象被const修饰，会延长他的生命周期
 		{
 			if (n < size())
 			{
@@ -109,35 +104,25 @@ namespace lrf
 			}
 			else
 			{
-				if (n > capacity())                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         		if (n > capacity())
-				{
+				if (n > capacity())
 					reserve(n);
-				}
-				while (_finish != _start + n)
+			
+				while (_finish != _start+n)
 				{
 					*_finish = val;
 					++_finish;
 				}
-
 			}
 		}
 
-
-		void pop_back()
+		iterator insert(iterator pos, const T& x)
 		{
-			assert(_finish > _start);
-			--_finish;
-		}
-
-		iterator insert(iterator pos, const T& x)  //通过设置insert的返回值类型，一定程度上“解决”迭代器失效问题
-		{
-			assert(pos >= _start && pos <= _finish);  //=_finish相当于尾插
+			assert(pos >= _start&&pos<=_endofstorage);
 			if (_finish == _endofstorage)
 			{
-				//扩容之后 _start和_finish发生变化，会导致迭代器失效
 				size_t len = pos - _start;
-				reserve(capacity() == 0 ?4:capacity() * 2);
-				pos = _start + len;
+				reserve(capacity() == 0 ? 4 : 2 * capacity());
+				pos = _start + len;  //防止迭代器失效
 			}
 			iterator end = _finish - 1;
 			while (end >= pos)
@@ -147,15 +132,14 @@ namespace lrf
 			}
 			*pos = x;
 			++_finish;
-			return pos;//返回新位置的迭代器
+			return pos;
 		}
 
-		iterator erase(iterator pos)  //返回所删除元素的下一个元素的位置
+		iterator erase(iterator pos)
 		{
-			assert(pos >= _start && pos <= _finish);
-
+			assert(pos>=_start&&pos<_finish);
 			iterator begin = pos + 1;
-			while (begin < _finish)
+			while (begin<_finish)
 			{
 				*(begin - 1) = *begin;
 				++begin;
@@ -164,147 +148,56 @@ namespace lrf
 			return pos;
 		}
 
-		size_t size() const
+		void  push_back(const T& x)
 		{
-			return _finish - _start;
-		}
-
-		size_t capacity() const
-		{
-			return _endofstorage - _start;
-		}
-
-		void push_back(const T& x)
-		{
-			if (_finish==_endofstorage)
+			if (_finish == _endofstorage)
 			{
-				//扩容
-				reserve(capacity() == 0  ? 4 : capacity() * 2);
+				reserve(capacity() == 0 ? 4 : capacity() * 2);
 			}
 			*_finish = x;
 			++_finish;
 		}
 
-		T& operator[](size_t i)
+		void pop_back()
 		{
-			assert(i < size());
-			return _start[i];
-		}		
-		T& operator[](size_t i) const
-		{
-			assert(i < size());
-			return _start[i];
+			assert(_finish < _start);
+			--_finish;
 		}
 
+		iterator begin() const
+		{
+			return _start;
+		}
+		iterator end() const 
+		{
+			return _finish;
+		}
 
 	private:
 		iterator _start;
 		iterator _finish;
 		iterator _endofstorage;
 	};
-	
-}
 
-void test_vector2()
-{
-	lrf::vector<string> v1;
-	v1.push_back("1234556788934");
-	v1.push_back("1234556788934");
-	v1.push_back("1234556788934");
-	v1.push_back("1234556788934");
-	v1.push_back("1234556788934");
-	v1.push_back("1234556788934");
-
-}
-
-void test_vector1()
-{
-	lrf::vector<int> v1;
-	v1.push_back(1);
-	v1.push_back(2);
-	v1.push_back(3);
-	v1.push_back(4);
-	for (auto e : v1)
+	void test_vector1()
 	{
-		cout << e << " ";
-	}
-	cout << endl;
+		vector<int> v;
+		v.push_back(1);
+		v.push_back(2);
+		v.push_back(3);
+		v.push_back(4);
+		v.push_back(5);
 
+		v.insert(find(v.begin(), v.end(), 4),233);
+		v.insert(find(v.begin(), v.end(), 1),111);
+		v.insert(find(v.begin(), v.end(), 5),555);
 
-	// 1 2 3 4 5 正常
-	// 1 2 3 4   崩溃
-	// 1 2 4 5   结果不对
-	//lrf::vector<int>::iterator it = find(v1.begin(), v1.end(), 2);	
-	lrf::vector<int>::iterator it = v1.begin();
-	while (it != v1.end())
-	{
-		if (*it % 2 == 0)
+		vector<int> v2(v);
+
+		for (auto e : v2)
 		{
-			v1.erase(it);
+			cout << e << ' ';
 		}
-		else
-		{
-			++it;
-		}
+		cout << endl;
 	}
-	for (auto e : v1)
-	{
-		cout << e << " ";
-	}
-	cout << endl;
-	//
-	//lrf::vector<int>::iterator pos = find(v1.begin(),v1.end(),2);
-	//if (pos != v1.end())
-	//{
-	//	//insert中发生了扩容，那么会导致it指向的空间被释放，
-	//	//it本质就是一个野指针，这种问题我们就叫做迭代器失效
-	//	v1.insert(v1.begin(), 20);
-	//}
-	//for (auto e : v1)
-	//{
-	//	cout << e << " ";
-	//}
-	//cout << endl;
 }
-
-//void test_vector()
-//{
-//	lrf::vector<lrf::vector<int>> vv = lrf::Solution().generate(5);
-//	for (size_t i = 0; i < vv.size(); i++)
-//	{
-//		for (int j = 0; j < vv[i].size(); j++)
-//		{
-//			std::cout << vv[i][j] << ' ';
-//		}
-//		std::cout << std::endl;
-//	}
-//	std::cout << std::endl;
-//}
-
-//void test_vector()
-//{
-//	lrf::vector<int> v;
-//	v.push_back(1);
-//	v.push_back(2);
-//	v.push_back(3);
-//	v.push_back(4);
-//	v.push_back(5);
-//	v.push_back(6);
-//	for (int i = 0; i < v.size(); i++)
-//	{
-//		std::cout << v[i] <<' ';
-//	}
-//	std::cout << std::endl;
-//	lrf::vector<int>::iterator it = v.begin();
-//	while (it != v.end())
-//	{
-//		std::cout << *it << ' ';
-//		++it;
-//	}
-//	std::cout << std::endl;
-//	for (auto x : v)
-//	{
-//		std::cout << x << ' ';
-//	}
-//	std::cout << std::endl;
-//}
