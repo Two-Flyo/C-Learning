@@ -87,7 +87,13 @@ namespace lrf
 			T* tmp = new T[n];
 			if (_start)
 			{
-				memcpy(tmp, _start, sizeof(T) * n);
+				//memcpy(tmp, _start, sizeof(T) * n);//用memcpy使vector中的string对象发生了浅拷贝，析构时发生错误
+				for (size_t i = 0; i < len; i++)
+				{
+					//T是int,一个一个拷贝没问题，T是string，
+					//一个一个拷贝调用的是T的深拷贝赋值
+					tmp[i] = _start[i];
+				}
 				delete _start;
 			}
 			_start = tmp;
