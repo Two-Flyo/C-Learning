@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	lrf::test_list();
+	lrf::test_list1();
 	return 0;
 }
 

@@ -4,6 +4,6 @@
 using namespace std;
 int main()
 {
-	lrf::test_list1();
+	lrf::test_list2();
 	return 0;
 }
