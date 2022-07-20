@@ -2,6 +2,7 @@
 #include<assert.h>
 #include<iostream>
 #include<algorithm>
+#include"reverse_iterator.h"
 using namespace std;
 
 namespace lrf
@@ -10,13 +11,25 @@ namespace lrf
 	class vector
 	{
 		typedef T* iterator;
+		typedef const T* const_iterator;
+
+		typedef reverse_iterator<const_iterator, const T&, const T*> const_reverse_iterator;
+		typedef reverse_iterator<iterator, T&, T*> reverse_iterator;
 	public:
 		vector()
 			:_start(nullptr),
 			_finish(nullptr),
 			_endofstorage(nullptr)
 		{}
+		reverse_iterator rbegin()
+		{
+			return reverse_iterator(end());
+		}
 
+		reverse_iterator rend()
+		{
+			return reverse_iterator(begin());
+		}
 		//一个类模板的成员函数，又可以是一个函数模板
 		template<class InputIterator>
 		vector(InputIterator first,InputIterator last)
@@ -194,16 +207,22 @@ namespace lrf
 		v.push_back(4);
 		v.push_back(5);
 
-		v.insert(find(v.begin(), v.end(), 4),233);
-		v.insert(find(v.begin(), v.end(), 1),111);
-		v.insert(find(v.begin(), v.end(), 5),555);
-
-		vector<int> v2(v);
-
-		for (auto e : v2)
+		vector<int>::reverse_iterator rit = v.rbegin();
+		while (rit != v.rend())
 		{
-			cout << e << ' ';
+			cout << *rit << endl;
+			++rit;
 		}
-		cout << endl;
+		//v.insert(find(v.begin(), v.end(), 4),233);
+		//v.insert(find(v.begin(), v.end(), 1),111);
+		//v.insert(find(v.begin(), v.end(), 5),555);
+
+		//vector<int> v2(v);
+
+		//for (auto e : v2)
+		//{
+		//	cout << e << ' ';
+		//}
+		//cout << endl;
 	}
 }
