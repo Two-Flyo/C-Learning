@@ -6,17 +6,37 @@
 using namespace std;
 namespace lrf
 {
+	template <class T>
+	struct Less
+	{
+		bool operator()(const T& x, const T& y)
+		{
+			return x < y;
+		}
+	};
+	template <class T>
+	struct Greater
+	{
+		bool operator()(int x, int y)
+		{
+			return x > y;
+		}
+	};
+
+
 	//默认大堆 大的优先级高
-	template<class T,class Container = vector<T>>
+	template<class T,class Container = vector<T>,class Compare = Greater<T>>
 	class priority_queue
 	{
 	private:
 		void adjust_up(size_t child)
 		{
+			Compare com;
 			size_t parent = (child - 1) / 2;
 			while (child>0)
 			{
-				if (_con[child] < _con[parent])
+				//if (_con[child] > _con[parent])
+				if (com(_con[parent] , _con[child]))
 				{
 					swap(_con[child], _con[parent]);
 					child = parent;
@@ -31,12 +51,13 @@ namespace lrf
 
 		void adjust_down(size_t parent)
 		{
+			Compare com;
 			size_t child = 2 * parent + 1;
 			while (child<_con.size())
 			{
-				if (child + 1 < _con.size() && _con[child + 1] < _con[child])
+				if (child + 1 < _con.size() &&com(_con[child], _con[child+1]))
 					++child;
-				if (_con[child] < _con[parent])
+				if (com(_con[parent], _con[child]))
 				{	
 					swap(_con[child], _con[parent]);
 					parent = child;
@@ -98,7 +119,7 @@ namespace lrf
 		
 	};
 
-	void test_priority_queue()
+	void test_priority_queue1()
 	{
 		priority_queue<int,vector<int>> pq;
 		pq.push(3);
@@ -113,4 +134,5 @@ namespace lrf
 		}
 		cout << endl;
 	}
+
 }

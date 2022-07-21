@@ -24,22 +24,7 @@ void test_priority_queue()
 	cout << endl;
 }
 
-template <class T>
-struct Less
-{
-	bool operator()(const T& x, const T& y)
-	{
-		return x < y;
-	}
-};
 
-struct Greater
-{
-	bool operator()(int x, int y)
-	{
-		return x > y;
-	}
-};
 
 int main()
 {
@@ -49,12 +34,12 @@ int main()
 
 	//Greater greater;
 	//cout << greater(1, 2) << endl;
-	////lrf::test_priority_queue();
-	Less<int> less;
-	cout << less(1, 2) << endl;
-	
-	cout << Less<int>()(1, 2) << endl;
+	lrf::test_priority_queue();
+	//Less<int> less;
+	//cout << less(1, 2) << endl;
+	//
+	//cout << Less<int>()(1, 2) << endl;
 
-	cout << Less<double>()(1, 2) << endl;
+	//cout << Less<double>()(1, 2) << endl;
 	return 0;
 }
