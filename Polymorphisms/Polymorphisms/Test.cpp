@@ -2,10 +2,47 @@
 
 using namespace std;
 
+class Base
+{
+public:
+	virtual void func1() { cout << "Base::func1" << endl; }
+	virtual void func2() { cout << "Base::func2" << endl; }
+};
+
+
+class Derive :public Base
+{
+public:
+	virtual void func1() { cout << "Derive::func1" << endl; }
+	virtual void func3() { cout << "Derive::func3" << endl; }
+private:
+	int _b;
+};
+
+typedef void(*VF_PTR)();
+
+void PrintVFTable(VF_PTR* table)
+{
+	for (int i = 0; table[i]; ++i)
+	{
+		printf("[%d]:%p\n", i, table[i]);
+		VF_PTR f = table[i];
+		f();
+	}
+}
+
+#ifdef _WIN64
+
+#else
+
+#endif
+
 int main()
 {
-
-	return 0;
+	Base b;
+	Derive d;
+	PrintVFTable((VF_PTR*)* ((int*)&b));
+	
 }
 
 //class Person
