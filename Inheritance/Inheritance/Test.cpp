@@ -1,192 +1,121 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
 class A
 {
-private:
-	int _a;
+public:
+	A()
+	{
+		cout << "A()" << endl;
+	}
+	~A()
+	{
+		cout << "~A()" << endl;
+	}
 };
-
-class B:public A
+class Person
 {
-private:
-	int _b;
+protected:
+	int _age;
+	string _name;
+public:
+	Person()
+	{
+		cout << "Person()" << endl;
+	}
+	~Person()
+	{
+		cout << "~Person()" << endl;
+	}
 };
 
-class C
+class Students :public Person
 {
+protected:
+	int _grade;
+	A _a;
 
 };
+
 
 int main()
 {
-
+	Students s;
 	return 0;
 }
 
+
+//1.A和B的fun构成函数重载
+//2.编译报错
+//3.运行报错
+//4.A和B的func构成函数隐藏
+
+//class A 
+//{
+//public:
+//	void fun()
+//	{
+//		cout << "fun()" << endl;
+//	}
+//};
+//
+//class B :public A
+//{
+//public:
+//	void fun(int i)
+//	{
+//		cout << "fun(int i)" << endl;
+//	}
+//};
+//
+//void Test()
+//{
+//	B b;
+//	b.fun();//error
+//	b.A::fun();//指明作用域则可以调用
+//	b.fun(1);
+//}
+//
+//int main()
+//{
+//
+//
+//	return 0;
+//}
+
+
 //class Person
 //{
-//public:
-//	Person(const char* name="lrf")
-//	{
-//		_name = name;
-//		_count++;
-//	}
-//	void Print()
-//	{}
-//	static int _count;
-//
-//public:
-//	string _name;
-//};
-//
-//int Person::_count = 0;
-//
-//class Student : virtual public Person
-//{
-//public:
-//	Student(const char* name="lrf", int num=18)
-//		:Person(name),_num(num)
-//	{}
-//
-//	//s2(s1)
-//	Student(const Student& s)
-//		:Person(s),_num(s._num)
-//	{}
-//
-//
-//	Student& operator=(const Student& s)
-//	{
-//		if (this != &s)
-//		{
-//			Person::operator=(s);
-//			_num = s._num;
-//		}
-//		return *this;
-//	}
-//
-//	~Student()
-//	{
-//		Person::~Person();
-//
-//
-//	}
-//public:
-//	int _num;
-//};
-//
-//class Teacher :virtual public Person
-//{
-//public:
-//	int _id;
-//};
-//
-//
-//
-//class Graduate :public Student
-//{
-// protected:
-//	string _SeminarCourse;
-//};
-//
-//
-//class Assistant :public Student, public Teacher
-//{
 //protected:
-//	string _majorCourse;
+//	string _name = "111";
+//	string _id = "123";
+//	int _age = 123;
+//	int _height = 174;
+//public:
+//	void print()
+//	{
+//		cout << "Name:" << _name << "Id:" << _id << "Age:" << _age;
+//	}
 //};
 //
-//class A
+//class Student :public Person
 //{
+//private:
+//	int _score = 100;
+//	int _height = 183;
 //public:
-//	int _a;
+//	void print()
+//	{
+//		cout << "Name:" << _name << "Id:" << _id << "Age:" << _age<<"Score:"<<_score<<"Height:"<<_height;
+//	}
 //};
-//// class B : public A
-//class B :virtual public A
-//{
-//public:
-//	int _b;
-//};
-//// class C : public A
-//class C :virtual public A
-//{
-//public:
-//	int _c;
-//};
-//class D : public B, public C
-//{
-//public:
-//	int _d;
-//};
-//int main()
-//{
-//	D d;
-//	d.B::_a = 1;
-//	d.C::_a = 2;
-//	d._b = 3;
-//	d._c = 4;
-//	d._d = 5;
-//	cout<<sizeof(d);
-//	return 0;
-//}
-
-
-//int main()
-//{
-//	Assistant a;
-//	a._id = 1;
-//	a._num = 1;
-//
-//	//a._name = "lrf";//erroe 二义性
-//	a.Student::_name = "lrf";
-//	a.Teacher::_name = "Mr.F";
-//
-//	a._name = "liuruifei";
-//	return 0;
-//}
 
 //int main()
 //{
 //	Person p;
 //	Student s;
-//	Graduate g;
-//
-//	cout << Person::_count << endl;
-//	cout << Student::_count << endl;
-//	cout << Graduate::_count << endl;
-//	return 0;
-//}
-
-//派生类的四个默认成员函数我们不写，编译器默认生成的会干些什么事情呢？
-//我们如果去写，应该怎么写?
-//int main()
-//{
-//	Student s1("zhangsan");
-//	Student s2(s1);
-//	Student s3;
-//	s3 = s2;
-//		
-//	return 0;
-//}
-
-//int main()
-//{
-//	Person p;
-//	Student s;
-//
-//	//父类=子类  赋值兼容-> 切割 切片
-//	//不存在类型转换，语法天然支持的行为
-//	p = s;
-//	Person* ptr = &s;
-//	Person& ref = s;
-
-	//父类不能给子类
-	//s = (Student)p;//error
-	//Student* pptr = (Student*)&p;
-	//Student& rref = (Student&)p;
-	//很危险，存在越界风险
-//	
+//	//赋值兼容 / 切割 / 切片
+//	s.print();
 //	return 0;
 //}
