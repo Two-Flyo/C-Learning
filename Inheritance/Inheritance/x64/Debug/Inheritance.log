@@ -1,3 +1,2 @@
 ﻿  Test.cpp
-D:\C++_Learing\Inheritance\inheritance\Test.cpp(44,11): warning C4930: “Students s(void)”: 未调用原型函数(是否是有意用变量定义的?)
-  inheritance.vcxproj -> D:\C++_Learing\Inheritance\x64\Debug\inheritance.exe
+  inheritance.vcxproj -> D:\C++-Learning\inheritance\x64\Debug\inheritance.exe

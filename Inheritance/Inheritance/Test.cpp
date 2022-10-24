@@ -34,8 +34,34 @@ class Students :public Person
 {
 protected:
 	int _grade;
-	A _a;
+public:
+	Students()
+	{
 
+	}
+	Students(const Students& s)
+		:Person(s),_grade(s._grade)
+	{
+
+	}
+
+	Students& operator=(const Students& s)
+	{
+		if (this != &s)
+		{
+			Person::operator=(s);
+			_grade = s._grade;
+		}
+
+		return *this;
+	}
+	//析构函数名字会被统一处理成destructor()
+	//那么子类的析构函数跟父类的析构函数就会构成隐藏
+	//学习了多态我们才会理解为什么析构函数名会被统一处理
+	~Students()
+	{
+		Person::~Person();
+	}
 };
 
 
